@@ -11,7 +11,8 @@ if ($flag) {
     $content = "<?php return[";
 
     $content .= "'components' => [
-        'db' => [";
+        'db' => [
+        'class' => 'yii\\db\\Connection',";
     echo "\n  Enter DB-Host: default(localhost) ";
     $dbHost = trim(fgets(STDIN));
     if (empty($dbHost)) {
@@ -43,7 +44,7 @@ if ($flag) {
     echo "\n  Enter DB-tablePrefix: ";
     $dbTablePrefix = trim(fgets(STDIN));
     $content .= "'tablePrefix' => '$dbTablePrefix', ";
-    $content .= "]]];";
+    $content .= "'charset' => 'utf8',]]];";
 
     $connection = @new Mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
 

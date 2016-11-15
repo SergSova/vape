@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m130524_201442_init extends Migration
+class m130524_201442_user extends Migration
 {
     public function up()
     {
@@ -14,11 +14,17 @@ class m130524_201442_init extends Migration
 
         $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
-            'username' => $this->string()->notNull()->unique(),
+            'username' => $this->string(),
+            'email' => $this->string()->notNull()->unique(),
+
+            'f_name' => $this->string(),
+            'l_name' => $this->string(),
+            'date_birthday' => $this->integer(),
+            'phone' => $this->string(),
+
             'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),
-            'email' => $this->string()->notNull()->unique(),
 
             'status' => $this->smallInteger()->notNull()->defaultValue(10),
             'created_at' => $this->integer()->notNull(),

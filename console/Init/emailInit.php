@@ -25,10 +25,11 @@ if (!strncasecmp($answer, 'y', 1)) {
     $flag = true;
     $useFileTransport = 0;
 }
-$content .= "'components' => ['mailer'=>['useFileTransport' => $useFileTransport,";
+$content .= "'components' => ['mailer'=>['class' => 'yii\\swiftmailer\\Mailer',
+            'viewPath' => '@common/mail','useFileTransport' => $useFileTransport,";
 
 if ($flag) {
-    $transport = '[';
+    $transport = "['class' => 'Swift_SmtpTransport',";
     echo "\n  Host: default(smtp.gmail.com)";
     $host = trim(fgets(STDIN));
     if (empty($host))
