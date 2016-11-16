@@ -14,8 +14,8 @@ class m171111_090113_create_table_order extends Migration
             'deliver_id' => $this->integer()->notNull(), //доставка на
             'customer' => $this->integer(), //заказчик
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
 
         $this->addForeignKey('FK_O_deliver', self::tableName, 'deliver_id', '{{%deliver}}', 'id', 'CASCADE', 'CASCADE');

@@ -17,8 +17,8 @@ class m161115_090113_create_table_product extends Migration
             'description' => $this->text()->notNull(),
             'stock' => $this->integer(),  //остаток товара на складе
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
     }
 

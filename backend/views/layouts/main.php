@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use backend\assets\AppAsset;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -40,6 +41,12 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+        $menuItems = ArrayHelper::merge($menuItems, [
+            ['label' => 'Category', 'url' => ['/category/index']],
+            ['label' => 'Deliver', 'url' => ['/deliver/index']],
+            ['label' => 'Option', 'url' => ['/option/index']],
+            ['label' => 'Product', 'url' => ['/product/index']],
+        ]);
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

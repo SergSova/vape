@@ -16,8 +16,8 @@ class m171118_100131_create_table_action extends Migration
             'icon'=>$this->string()->defaultValue(''),
             'status'=>'ENUM("active", "inactive", "blocked")',
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
     }
 

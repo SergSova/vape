@@ -14,8 +14,8 @@ class m171113_090113_create_table_order_product_option extends Migration
             'option_id' => $this->integer()->notNull(),
             'old_price' => $this->money()->notNull(),
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
 
         $this->addForeignKey('FK_OPO_order_detail', self::tableName, 'order_detail_id', '{{%order_detail}}', 'id', 'CASCADE', 'CASCADE');

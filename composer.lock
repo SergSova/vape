@@ -4,9 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "17d42c2c150809441293e02f059192a2",
-    "content-hash": "38867685368485c776b5b447b334f86c",
+    "hash": "136f02b8f3364d2da944c90033802f31",
+    "content-hash": "045708fedc9d24d8b7d6ef7cb946ea60",
     "packages": [
+        {
+            "name": "alexposseda/filemanager",
+            "version": "v1.0.3-stable",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexposseda/fileManagerForYii2.git",
+                "reference": "8eeb4cef5ad3766ead14d757e61cba65cb0ce100"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexposseda/fileManagerForYii2/zipball/8eeb4cef5ad3766ead14d757e61cba65cb0ce100",
+                "reference": "8eeb4cef5ad3766ead14d757e61cba65cb0ce100",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yii\\alexposseda\\fileManager\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Posseda",
+                    "email": "alexposseda@gmail.com"
+                }
+            ],
+            "description": "The file manager for the Yii framework",
+            "keywords": [
+                "ajax",
+                "filemanager",
+                "uploadfile",
+                "yii2"
+            ],
+            "time": "2016-08-25 15:01:50"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.7",
@@ -300,6 +342,63 @@
             "time": "2016-07-16 12:58:58"
         },
         {
+            "name": "imagine/imagine",
+            "version": "v0.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/avalanche123/Imagine.git",
+                "reference": "149041d2a1b517107bfe270ca2b1a17aa341715d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/149041d2a1b517107bfe270ca2b1a17aa341715d",
+                "reference": "149041d2a1b517107bfe270ca2b1a17aa341715d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "sami/sami": "dev-master"
+            },
+            "suggest": {
+                "ext-gd": "to use the GD implementation",
+                "ext-gmagick": "to use the Gmagick implementation",
+                "ext-imagick": "to use the Imagick implementation"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Imagine": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com",
+                    "homepage": "http://avalanche123.com"
+                }
+            ],
+            "description": "Image processing for PHP 5.3",
+            "homepage": "http://imagine.readthedocs.org/",
+            "keywords": [
+                "drawing",
+                "graphics",
+                "image manipulation",
+                "image processing"
+            ],
+            "time": "2015-09-19 16:54:05"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "5.x-dev",
             "source": {
@@ -358,12 +457,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "da85054e8b04edb29faa22128b5f3ef3a4b7d9c5"
+                "reference": "593255ae000efdb734d04d7b9ffed10d99df52df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/da85054e8b04edb29faa22128b5f3ef3a4b7d9c5",
-                "reference": "da85054e8b04edb29faa22128b5f3ef3a4b7d9c5",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/593255ae000efdb734d04d7b9ffed10d99df52df",
+                "reference": "593255ae000efdb734d04d7b9ffed10d99df52df",
                 "shasum": ""
             },
             "require": {
@@ -444,7 +543,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-11-14 23:26:53"
+            "time": "2016-11-15 10:30:04"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -542,6 +641,54 @@
                 "yii2"
             ],
             "time": "2016-06-05 20:34:32"
+        },
+        {
+            "name": "yiisoft/yii2-imagine",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-imagine.git",
+                "reference": "59dcd0b43c2b0e5495c7e5c0320e2cbc1cd57411"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-imagine/zipball/59dcd0b43c2b0e5495c7e5c0320e2cbc1cd57411",
+                "reference": "59dcd0b43c2b0e5495c7e5c0320e2cbc1cd57411",
+                "shasum": ""
+            },
+            "require": {
+                "imagine/imagine": "~0.6.0",
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\imagine\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Antonio Ramirez",
+                    "email": "amigo.cobos@gmail.com"
+                }
+            ],
+            "description": "The Imagine integration for the Yii framework",
+            "keywords": [
+                "helper",
+                "image",
+                "imagine",
+                "yii2"
+            ],
+            "time": "2016-11-03 19:28:39"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",

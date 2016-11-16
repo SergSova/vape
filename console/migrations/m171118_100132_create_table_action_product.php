@@ -13,8 +13,8 @@ class m171118_100132_create_table_action_product extends Migration
             'product_id' => $this->integer()->notNull(),
             'action_id' => $this->integer()->notNull(),
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
 
         $this->addForeignKey('FK_AP_product', self::tableName, 'product_id', '{{%product}}', 'id', 'CASCADE', 'CASCADE');

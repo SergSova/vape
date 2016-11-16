@@ -13,8 +13,8 @@ class m171115_100139_create_table_site_setting extends Migration
             'name' => $this->string()->notNull(),
             'value'=>$this->text()->notNull(),
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
     }
 

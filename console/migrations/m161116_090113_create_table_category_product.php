@@ -13,8 +13,8 @@ class m161116_090113_create_table_category_product extends Migration
             'category_id' => $this->integer(), //relation to category table
             'product_id' => $this->integer(), //relation to product table
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
 
         $this->addForeignKey('FK_CP_category', self::tableName, 'category_id', '{{%category}}', 'id', 'CASCADE', 'CASCADE');

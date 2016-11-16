@@ -2,9 +2,9 @@
 
 use yii\db\Migration;
 
-class m171117_100139_create_table_static extends Migration
+class m171117_100139_create_table_static_page extends Migration
 {
-    const tableName = '{{%static}}';
+    const tableName = '{{%static_page}}';
 
     public function up()
     {
@@ -13,8 +13,8 @@ class m171117_100139_create_table_static extends Migration
             'title' => $this->string()->notNull(),
             'val' => $this->string()->notNull(),
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
     }
 

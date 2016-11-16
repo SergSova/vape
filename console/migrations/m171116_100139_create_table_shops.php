@@ -15,8 +15,8 @@ class m171116_100139_create_table_shops extends Migration
             'phone' => $this->string(),
             'schedule' => $this->string(),
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
     }
 

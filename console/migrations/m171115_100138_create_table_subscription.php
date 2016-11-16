@@ -12,8 +12,8 @@ class m171115_100138_create_table_subscription extends Migration
             'id' => $this->primaryKey(),
             'email_to' => $this->string()->notNull(),
 
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'created_at' => $this->integer(),
+            'updated_at' => $this->integer(),
         ]);
     }
 
