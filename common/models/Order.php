@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\traits\orderTrait;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -18,18 +19,22 @@ use yii\db\ActiveRecord;
  *
  * @property User $customer0
  * @property Deliver $deliver
+ * @property OrderDetail[] $orderDetails
  */
 class Order extends ActiveRecord
 {
+    use orderTrait;
+
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
             TimestampBehavior::className(),
         ];
     }
+
     /**
      * @inheritdoc
      */
@@ -47,8 +52,21 @@ class Order extends ActiveRecord
             [['status'], 'string'],
             [['deliver_id'], 'required'],
             [['deliver_id', 'customer', 'created_at', 'updated_at'], 'integer'],
-            [['customer'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['customer' => 'id']],
-            [['deliver_id'], 'exist', 'skipOnError' => true, 'targetClass' => Deliver::className(), 'targetAttribute' => ['deliver_id' => 'id']],
+            [
+                ['customer'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => User::className(),
+                'targetAttribute' => ['customer' => 'id']
+            ],
+            [
+                ['deliver_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => Deliver::className(),
+                'targetAttribute' => ['deliver_id' => 'id']
+            ],
+            ['customer', 'default', 'value' => Yii::$app->user->id]
         ];
     }
 
@@ -82,4 +100,13 @@ class Order extends ActiveRecord
     {
         return $this->hasOne(Deliver::className(), ['id' => 'deliver_id']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrderDetails()
+    {
+        return $this->hasMany(OrderDetail::className(), ['order_id' => 'id']);
+    }
+
 }

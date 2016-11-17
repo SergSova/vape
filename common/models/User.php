@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\traits\userTrait;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -25,18 +26,21 @@ use yii\db\ActiveRecord;
  *
  * @property Deliver[] $delivers
  * @property Order[] $orders
+ * @method array $this->getDeliversMap
  */
-class User extends \yii\db\ActiveRecord
+class User extends ActiveRecord
 {
+    use userTrait;
     /**
-    * @inheritdoc
-    */
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
             TimestampBehavior::className(),
         ];
     }
+
     /**
      * @inheritdoc
      */
@@ -53,7 +57,11 @@ class User extends \yii\db\ActiveRecord
         return [
             [['email', 'auth_key', 'password_hash'], 'required'],
             [['date_birthday', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'email', 'f_name', 'l_name', 'phone', 'password_hash', 'password_reset_token'], 'string', 'max' => 255],
+            [
+                ['username', 'email', 'f_name', 'l_name', 'phone', 'password_hash', 'password_reset_token'],
+                'string',
+                'max' => 255
+            ],
             [['auth_key'], 'string', 'max' => 32],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
@@ -97,4 +105,6 @@ class User extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Order::className(), ['customer' => 'id']);
     }
+
+
 }

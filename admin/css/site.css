@@ -131,4 +131,14 @@ a.desc:after {
 }
 #product-list img{
     height: 50px;
+    margin-right: 20px;
+}
+#product-list .item{
+    display: inline-block;
+    position: relative;
+    width: 200px;
+}
+#product-list .product-order{
+    position: absolute;
+    left: 80px;
 }

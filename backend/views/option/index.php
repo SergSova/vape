@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 //            'id',
             'name',
+            'catOption.name',
             'price',
             'Icon:image',
             'description:ntext',

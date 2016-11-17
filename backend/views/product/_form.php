@@ -2,7 +2,7 @@
 
 use backend\widgets\FileManagerWidget\FileManagerWidget;
 use common\models\Category;
-use common\models\Option;
+use common\models\OptionCategory;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -13,7 +13,9 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 
 $category = ArrayHelper::map(Category::find()->all(), 'id', 'name');
-$options = ArrayHelper::map(Option::find()->all(), 'id', 'name');
+if ($model->isNewRecord) {
+    $opt_category = OptionCategory::find()->all();
+}
 ?>
 
 <div class="product-form">
@@ -36,8 +38,12 @@ $options = ArrayHelper::map(Option::find()->all(), 'id', 'name');
                 'rows' => 6,
                 'placeholder' => 'Описание'
             ]) ?>
-            <?= $form->field($model, 'options')
-                ->dropDownList($options, ['multiple' => 'multiple']) ?>
+            <?php /** @var OptionCategory[] $opt_category */
+            foreach ($opt_category as $optCat): ?>
+                <h4><?= $optCat->name ?></h4>
+                <?= $form->field($model, 'options')
+                    ->checkboxList(ArrayHelper::map($optCat->options, 'id', 'name'))->label(false) ?>
+            <?php endforeach; ?>
         </div>
         <div class="col-lg-6">
             <?= Html::activeHiddenInput($model, 'icon', ['id' => 'product-cover']) ?>
