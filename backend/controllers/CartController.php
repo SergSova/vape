@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\Cart;
+use common\models\User;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -33,31 +34,25 @@ class CartController extends Controller
      */
     public function actionIndex()
     {
-        $model = Cart::find()->where(['user_id' => Cart::getUserId()])->all();
+        $model = Cart::find()->where(['user_id' => User::getUserId()])->all();
         return $this->render('index', [
             'model' => $model,
         ]);
     }
 
-    public function actionAddProduct($product_id, $count, $option_id = null)
+    public function actionAddProduct(/*$product_id, $count, $options*/)
     {
-//        $cart = Cart::getInstance();
-//        $cart->product_id = $id;
-//        $cart->count = $count;
-//        $cart->option_id = $option_id;
-//        $cart->save();
-
-        $cart = Cart::getCart($product_id, $option_id);
-        $cart->count += $count;
+        $cart_p = Yii::$app->request->post('Cart');
+        $cart = Cart::getCart($cart_p['product_id'], $cart_p['options']);
+        $cart->count += $cart_p['count'];
         if ($cart->save())
             return $this->redirect(['index']);
         else  return var_dump($cart->errors);
     }
 
-    public function actionRemoveProduct($product_id, $option_id = null)
+    public function actionRemoveProduct($cart_id)
     {
-        $cart = Cart::getCart($product_id, $option_id);
-        $cart->delete();
+        Cart::findOne($cart_id)->delete();
         return $this->redirect(['index']);
     }
 

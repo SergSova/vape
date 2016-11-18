@@ -13,9 +13,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 
 $category = ArrayHelper::map(Category::find()->all(), 'id', 'name');
-if ($model->isNewRecord) {
-    $opt_category = OptionCategory::find()->all();
-}
+
 ?>
 
 <div class="product-form">
@@ -38,11 +36,10 @@ if ($model->isNewRecord) {
                 'rows' => 6,
                 'placeholder' => 'Описание'
             ]) ?>
-            <?php /** @var OptionCategory[] $opt_category */
-            foreach ($opt_category as $optCat): ?>
+            <?php /** @var OptionCategory $optCat */
+            foreach (OptionCategory::find()->orderBy(['name' => 'DESC'])->all() as $optCat): ?>
                 <h4><?= $optCat->name ?></h4>
-                <?= $form->field($model, 'options')
-                    ->checkboxList(ArrayHelper::map($optCat->options, 'id', 'name'))->label(false) ?>
+                <?= Html::checkboxList('Product[options][]', $model->options, ArrayHelper::map($optCat->options, 'id', 'name')) ?>
             <?php endforeach; ?>
         </div>
         <div class="col-lg-6">

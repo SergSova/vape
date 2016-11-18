@@ -19,7 +19,10 @@ use yii\widgets\ActiveForm;
 
     <div class="row">
         <div class="col-lg-6">
-            <?= $form->field($model, 'cat_option_id')->dropDownList(ArrayHelper::map(OptionCategory::find()->all(), 'id', 'name')) ?>
+            <div class="row">
+                <?= $form->field($model, 'cat_option_id', ['options' => ['class' => 'col-lg-6']])->dropDownList(ArrayHelper::map(OptionCategory::find()->all(), 'id', 'name')) ?>
+                <?= Html::a('Add category', ['option-category/create'], ['class' => 'btn btn-primary']) ?>
+            </div>
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
             <div class="row">
                 <div class="col-lg-8">

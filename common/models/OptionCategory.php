@@ -16,7 +16,7 @@ use yii\db\ActiveRecord;
  *
  * @property Option[] $options
  */
-class OptionCategory extends \yii\db\ActiveRecord
+class OptionCategory extends ActiveRecord
 {
     /**
     * @inheritdoc

@@ -2,21 +2,17 @@
 
 namespace backend\controllers;
 
-use backend\models\UploadCover;
-use common\models\OptionCategory;
 use Yii;
-use common\models\Option;
-use common\models\search\SearchOption;
-use yii\alexposseda\fileManager\actions\RemoveAction;
-use yii\alexposseda\fileManager\actions\UploadAction;
+use common\models\OptionCategory;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * OptionController implements the CRUD actions for Option model.
+ * OptionCategoryController implements the CRUD actions for OptionCategory model.
  */
-class OptionController extends Controller
+class OptionCategoryController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,41 +29,23 @@ class OptionController extends Controller
         ];
     }
 
-    public function actions()
-    {
-        return [
-            'option-upload' => [
-                'class' => UploadAction::className(),
-                'uploadPath' => 'option',
-                'sessionEnable' => true,
-                'uploadModel' => new UploadCover([
-                    'validationRules' => [
-                        'extensions' => 'jpg, png',
-                        'maxSize' => 1024 * 500
-                    ]
-                ])
-            ],
-            'option-remove' => ['class' => RemoveAction::className()]
-        ];
-    }
-
     /**
-     * Lists all Option models.
+     * Lists all OptionCategory models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SearchOption();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = new ActiveDataProvider([
+            'query' => OptionCategory::find(),
+        ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Option model.
+     * Displays a single OptionCategory model.
      * @param integer $id
      * @return mixed
      */
@@ -79,13 +57,13 @@ class OptionController extends Controller
     }
 
     /**
-     * Creates a new Option model.
+     * Creates a new OptionCategory model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Option();
+        $model = new OptionCategory();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -97,7 +75,7 @@ class OptionController extends Controller
     }
 
     /**
-     * Updates an existing Option model.
+     * Updates an existing OptionCategory model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -116,7 +94,7 @@ class OptionController extends Controller
     }
 
     /**
-     * Deletes an existing Option model.
+     * Deletes an existing OptionCategory model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -129,20 +107,18 @@ class OptionController extends Controller
     }
 
     /**
-     * Finds the Option model based on its primary key value.
+     * Finds the OptionCategory model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Option the loaded model
+     * @return OptionCategory the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Option::findOne($id)) !== null) {
+        if (($model = OptionCategory::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
-
 }

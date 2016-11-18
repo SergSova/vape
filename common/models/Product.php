@@ -8,7 +8,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "vps_product".
+ * This is the model class for table "{{%product}}".
  *
  * @property integer $id
  * @property string $name
@@ -21,6 +21,7 @@ use yii\db\ActiveRecord;
  * @property integer $updated_at
  *
  * @property ActionProduct[] $actionProducts
+ * @property Cart[] $carts
  * @property CategoryProduct[] $categoryProducts
  * @property OptionProduct[] $optionProducts
  * @property OrderDetail[] $orderDetails
@@ -44,7 +45,7 @@ class Product extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'vps_product';
+        return '{{%product}}';
     }
 
     /**
@@ -55,12 +56,11 @@ class Product extends ActiveRecord
         return [
             [['name', 'price', 'description'], 'required'],
             [['gallery', 'description'], 'string'],
-            [['price', 'stock'], 'number', 'min' => 0],
-            [['created_at', 'updated_at'], 'integer'],
+            [['price'], 'number'],
+            [['stock', 'created_at', 'updated_at'], 'integer'],
             [['name', 'icon'], 'string', 'max' => 255],
-            ['stock', 'default', 'value' => 0],
-            [['options', 'categories'], 'safe'],
             [['name'], 'unique'],
+            [['categories', 'options'], 'safe']
         ];
     }
 
@@ -93,6 +93,14 @@ class Product extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getCarts()
+    {
+        return $this->hasMany(Cart::className(), ['product_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getCategoryProducts()
     {
         return $this->hasMany(CategoryProduct::className(), ['product_id' => 'id']);
@@ -113,5 +121,6 @@ class Product extends ActiveRecord
     {
         return $this->hasMany(OrderDetail::className(), ['product_id' => 'id']);
     }
+
 
 }

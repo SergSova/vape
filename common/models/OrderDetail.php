@@ -14,17 +14,22 @@ use yii\db\ActiveRecord;
  * @property integer $product_id
  * @property string $old_price
  * @property integer $count
- * @property integer $option_id
- * @property string $option_old_price
+ * @property string $options
  * @property integer $created_at
  * @property integer $updated_at
  *
- * @property Option $option
  * @property Order $order
  * @property Product $product
  */
 class OrderDetail extends ActiveRecord
 {
+    public function getOptions()
+    {
+        $options = Option::findAll(json_decode($this->options));
+        return $options ? $options : [];
+    }
+
+
     /**
     * @inheritdoc
     */
@@ -48,10 +53,10 @@ class OrderDetail extends ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'product_id', 'old_price', 'count', 'option_id', 'option_old_price'], 'required'],
-            [['order_id', 'product_id', 'count', 'option_id', 'created_at', 'updated_at'], 'integer'],
-            [['old_price', 'option_old_price'], 'number'],
-            [['option_id'], 'exist', 'skipOnError' => true, 'targetClass' => Option::className(), 'targetAttribute' => ['option_id' => 'id']],
+            [['order_id', 'product_id', 'old_price', 'count'], 'required'],
+            [['order_id', 'product_id', 'count', 'created_at', 'updated_at'], 'integer'],
+            [['old_price'], 'number'],
+            [['options'], 'string', 'max' => 255],
             [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Order::className(), 'targetAttribute' => ['order_id' => 'id']],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
@@ -68,19 +73,10 @@ class OrderDetail extends ActiveRecord
             'product_id' => 'Product ID',
             'old_price' => 'Old Price',
             'count' => 'Count',
-            'option_id' => 'Option ID',
-            'option_old_price' => 'Option Old Price',
+            'options' => 'Options',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getOption()
-    {
-        return $this->hasOne(Option::className(), ['id' => 'option_id']);
     }
 
     /**

@@ -85,16 +85,15 @@ trait productTrait
     }
 
     /**
-     * Return option to product in mapped array
      * @return array
      */
-    public function getOptionProductMap()
+    public function getOptionCategory()
     {
-        $map = [];
+        $cat_option = [];
         foreach ($this->optionProducts as $optionProduct) {
-            $map[$optionProduct->option_id] = $optionProduct->option->name;
+            $cat_option[$optionProduct->option->cat_option_id] = $optionProduct->option->catOption;
         }
-
-        return $map;
+        return $cat_option;
     }
+
 }

@@ -30,7 +30,9 @@ use yii\db\ActiveRecord;
  */
 class User extends ActiveRecord
 {
+    public $role;
     use userTrait;
+
     /**
      * @inheritdoc
      */
@@ -65,6 +67,7 @@ class User extends ActiveRecord
             [['auth_key'], 'string', 'max' => 32],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
+            ['role', 'default', 'value' => 'admin'],
         ];
     }
 

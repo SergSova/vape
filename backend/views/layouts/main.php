@@ -35,18 +35,21 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
+    $menuItems = [];
+    $menuItems = ArrayHelper::merge($menuItems, [
+        ['label' => 'Category', 'url' => ['/category/index']],
+        ['label' => 'Deliver', 'url' => ['/deliver/index']],
+        ['label' => 'Option', 'url' => ['/option/index']],
+        ['label' => 'OptionCategory', 'url' => ['/option-category/index']],
+        ['label' => 'Product', 'url' => ['/product/index']],
+        ['label' => 'Order', 'url' => ['/order/index']],
+        ['label' => 'Cart', 'url' => ['/cart/index']],
+    ]);
     if (Yii::$app->user->isGuest) {
+
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems = ArrayHelper::merge($menuItems, [
-            ['label' => 'Category', 'url' => ['/category/index']],
-            ['label' => 'Deliver', 'url' => ['/deliver/index']],
-            ['label' => 'Option', 'url' => ['/option/index']],
-            ['label' => 'Product', 'url' => ['/product/index']],
-        ]);
+
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

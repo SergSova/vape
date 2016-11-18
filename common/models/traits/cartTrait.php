@@ -4,6 +4,8 @@ namespace common\models\traits;
 
 
 use common\models\Cart;
+use common\models\Option;
+use common\models\User;
 use Yii;
 
 trait cartTrait
@@ -14,19 +16,26 @@ trait cartTrait
     public static function getAllCartUser()
     {
         $condition = [
-            'user_id' => Cart::getUserId(),
+            'user_id' => User::getUserId(),
         ];
         if (Cart::find()->where($condition)->exists())
-            return $cart = Cart::find()->where($condition)->one();
+            return $cart = Cart::find()->where($condition)->all();
         return false;
     }
 
     public static function getCart($product_id, $option_id)
     {
+        $options = [];
+        if ($option_id) {
+            foreach ($option_id as $item) {
+                if ($item == '') continue;
+                $options[] = $item;
+            }
+        }
         $condition = [
-            'user_id' => Cart::getUserId(),
+            'user_id' => User::getUserId(),
             'product_id' => $product_id,
-            'option_id' => $option_id
+            'option_id' => json_encode($options)
         ];
         if (Cart::find()->where($condition)->exists())
             $cart = Cart::find()->where($condition)->one();
@@ -35,20 +44,21 @@ trait cartTrait
         return $cart;
     }
 
-    public
-    function getFull_price()
+    public function getOptions()
     {
-        return $this->product->price + $this->option->price;
+        $options = Option::findAll(json_decode($this->option_id));
+        return $options ? $options : [];
     }
 
     public
-    static function getUserId()
+    function getFull_price()
     {
-        if (Yii::$app->user->isGuest) {
-            $user_id = Yii::$app->session->get('user_id');
-            $user_id = $user_id ? $user_id : Yii::$app->security->generateRandomString();
-        } else $user_id = Yii::$app->user->id;
-        Yii::$app->session->set('user_id', $user_id);
-        return $user_id;
+        $optionPrice = 0;
+        foreach (json_decode($this->option_id) as $item) {
+            $optionPrice += Option::findOne($item)->price;
+        }
+        return $this->product->price + $optionPrice;
     }
+
+
 }

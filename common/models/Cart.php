@@ -14,7 +14,7 @@ use yii\db\ActiveRecord;
  * @property string $user_id
  * @property integer $product_id
  * @property integer $count
- * @property integer $option_id
+ * @property string $option_id
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -54,14 +54,14 @@ class Cart extends ActiveRecord
     {
         return [
             [['user_id'], 'required'],
-            [['product_id', 'count', 'option_id', 'created_at', 'updated_at'], 'integer'],
-            [
+            [['product_id', 'count', /*'option_id',*/ 'created_at', 'updated_at'], 'integer'],
+            /*[
                 ['option_id'],
                 'exist',
                 'skipOnError' => true,
                 'targetClass' => Option::className(),
                 'targetAttribute' => ['option_id' => 'id']
-            ],
+            ],*/
             [
                 ['product_id'],
                 'exist',
@@ -69,6 +69,7 @@ class Cart extends ActiveRecord
                 'targetClass' => Product::className(),
                 'targetAttribute' => ['product_id' => 'id']
             ],
+            ['option_id','safe'],
             ['count', 'default', 'value' => 0]
         ];
     }
@@ -91,13 +92,13 @@ class Cart extends ActiveRecord
     }
 
     /**
-     * @return \yii\db\ActiveQuery
-     */
-    public
-    function getOption()
-    {
-        return $this->hasOne(Option::className(), ['id' => 'option_id']);
-    }
+//     * @return \yii\db\ActiveQuery
+//     */
+//    public
+//    function getOption()
+//    {
+//        return $this->hasOne(Option::className(), ['id' => 'option_id']);
+//    }
 
     /**
      * @return \yii\db\ActiveQuery
